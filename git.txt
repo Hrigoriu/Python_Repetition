@@ -1,0 +1,6 @@
+Щоденний Git workflow
+git status
+git add .
+git commit -m "day 01: variables and data types"
+git push
+

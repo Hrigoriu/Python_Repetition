@@ -1,0 +1,21 @@
+[project]
+name = "python-remember"
+version = "0.1.0"
+description = "Python about 30 days"
+authors = [
+    {name = "Hrigoriu", email = "Hrigoriu@gmail.com"}
+]
+requires-python = ">=3.14,<3.15"
+dependencies = []
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)",
+    "ruff (>=0.16.2,<0.17.0)"
+]
