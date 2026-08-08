@@ -1,6 +1,22 @@
+зайти в папку, наприклад
+D:\IT school\Projects\Projects_gpt-teacher\Python_Repetition
+або
+cd "D:\IT school\Projects\Projects_gpt-teacher\Python_Repetition"
+
+
+Щоб створити новий репозиторій на hithub:
+git init
+git status
+
+
+
 Щоденний Git workflow
 git status
 git add .
+git status
 git commit -m "day 01: variables and data types"
-git push
-
+git remote -v
+	origin  https://github.com/Hrigoriu/Python_Repetition.git (fetch)
+	origin  https://github.com/Hrigoriu/Python_Repetition.git (push)
+git remote add origin https://github.com/Hrigoriu/Python_Repetition.git
+git push -u origin main
