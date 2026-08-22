@@ -15,7 +15,8 @@ poetry env info --path
 poetry shell
 exit
 
-Наприклад, poetry run python
+Наприклад,      poetry run python
+                poetry add wcwidth
 
 кожен раз після установки пакету 
 poetry lock

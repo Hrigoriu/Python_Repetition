@@ -1,25 +1,32 @@
-#Практика №1
+# Практика №1
+"""
+Напиши програму, яка:
+
+створює змінні всіх базових типів;
+виводить їх значення;
+виводить їх тип через type().
+"""
 
 # --- Змінні всіх базових типів (крипто-тематика) ---
-coin_name = "Bitcoin"                                  # str
-price_usd = 64250.75                                   # float
-active_wallets = 48_500_000                             # int
-is_bullish = True                                       # bool
-top_coins = ["Bitcoin", "Ethereum", "Solana"]            # list
-ath_date = (2021, 11, 10)                                # tuple (рік, місяць, день)
+coin_name = "Bitcoin"  # str
+price_usd = 64250.75  # float
+active_wallets = 48_500_000  # int
+is_bullish = True  # bool
+top_coins = ["Bitcoin", "Ethereum", "Solana"]  # list
+ath_date = (2021, 11, 10)  # tuple (рік, місяць, день)
 coin_ranks = {"Bitcoin": 1, "Ethereum": 2, "Solana": 5}  # dict
-unique_exchanges = {"Binance", "Kraken", "Coinbase"}     # set
-last_hack_report = None                                  # NoneType
+unique_exchanges = {"Binance", "Kraken", "Coinbase"}  # set
+last_hack_report = None  # NoneType
 
 # --- Список для зручного виводу: (назва, значення, тип) ---
 variables = [
-    ("coin_name",        coin_name),
-    ("price_usd",        price_usd),
-    ("active_wallets",   active_wallets),
-    ("is_bullish",       is_bullish),
-    ("top_coins",        top_coins),
-    ("ath_date",         ath_date),
-    ("coin_ranks",       coin_ranks),
+    ("coin_name", coin_name),
+    ("price_usd", price_usd),
+    ("active_wallets", active_wallets),
+    ("is_bullish", is_bullish),
+    ("top_coins", top_coins),
+    ("ath_date", ath_date),
+    ("coin_ranks", coin_ranks),
     ("unique_exchanges", unique_exchanges),
     ("last_hack_report", last_hack_report),
 ]
@@ -50,9 +57,21 @@ coin_ranks       │ {'Bitcoin': 1, 'Ethereum': 2, 'Solana': 5} │ <class 'dict
 unique_exchanges │ {'Coinbase', 'Binance', 'Kraken'}          │ <class 'set'>
 last_hack_report │ None                                       │ <class 'NoneType'>
 """
-#===============================================================================
+# ===============================================================================
 
-#Практика №2
+# Практика №2
+"""
+Напиши програму:
+patient_name = "Іван"
+patient_age = 34
+patient_weight = 82.5
+patient_has_allergy = True
+
+Виведи:
+значення;
+тип;
+id().
+"""
 
 # --- Змінні зі зразка ---
 patient_name = "Іван"
@@ -61,17 +80,17 @@ patient_weight = 82.5
 patient_has_allergy = True
 
 # --- Додаткові змінні для повноти ---
-patient_diagnoses = ["гайморит", "риніт"]                    # list
-patient_vitals = {"pulse": 78, "pressure": "120/80"}         # dict
+patient_diagnoses = ["гайморит", "риніт"]  # list
+patient_vitals = {"pulse": 78, "pressure": "120/80"}  # dict
 
 # --- Список для зручного виводу: (назва, значення) ---
 variables = [
-    ("patient_name",        patient_name),
-    ("patient_age",         patient_age),
-    ("patient_weight",      patient_weight),
+    ("patient_name", patient_name),
+    ("patient_age", patient_age),
+    ("patient_weight", patient_weight),
     ("patient_has_allergy", patient_has_allergy),
-    ("patient_diagnoses",   patient_diagnoses),
-    ("patient_vitals",      patient_vitals),
+    ("patient_diagnoses", patient_diagnoses),
+    ("patient_vitals", patient_vitals),
 ]
 
 # --- Вивід у вигляді таблиці ---
@@ -83,7 +102,9 @@ print(header)
 print("─" * (len(header) + 5))
 
 for name, value in variables:
-    print(f"{name.ljust(name_width)} │ {str(value).ljust(value_width)} │ {str(type(value)).ljust(15)} │ {id(value)}")
+    print(
+        f"{name.ljust(name_width)} │ {str(value).ljust(value_width)} │ {str(type(value)).ljust(15)} │ {id(value)}"
+    )
 
 
 """
@@ -96,9 +117,20 @@ patient_has_allergy │ True                                │ <class 'bool'>  
 patient_diagnoses   │ ['гайморит', 'риніт']               │ <class 'list'>  │ 2477071762240
 patient_vitals      │ {'pulse': 78, 'pressure': '120/80'} │ <class 'dict'>  │ 2477071955200
 """
-#===============================================================================
+# ===============================================================================
 
-#Практика №3
+# Практика №3
+"""
+Покажи різницю між:
+==
+is
+
+На прикладі:
+list
+str
+None
+"""
+
 
 def show_comparison(title, a, b):
     "Показує порівняння == та is для двох об'єктів."
@@ -193,9 +225,20 @@ show_comparison("int (велике число)", price_a, price_b)
 │  id(b) = 1540456624592
 └──────────────────────────────────────────
 """
-#===============================================================================
+# ===============================================================================
 
-#Практика №4
+# Практика №4
+"""
+Напиши програму, яка:
+
+отримує:
+зріст
+вагу
+як рядки (input()),
+перетворює їх у числа,
+обчислює BMI.
+"""
+
 
 def get_number(prompt, is_float=True):
     "Запитує число і перевіряє, чи введено коректне значення."
@@ -224,15 +267,15 @@ def bmi_category(bmi):
 
 
 # --- Отримання даних як рядків через input(), з перетворенням у числа ---
-height_str = input("Введіть зріст (см): ")   # тип str, напр. "178"
-weight_str = input("Введіть вагу (кг): ")    # тип str, напр. "80.5"
+height_str = input("Введіть зріст (см): ")  # тип str, напр. "178"
+weight_str = input("Введіть вагу (кг): ")  # тип str, напр. "80.5"
 
-height = float(height_str)   # перетворення str → float
-weight = float(weight_str)   # перетворення str → float
+height = float(height_str)  # перетворення str → float
+weight = float(weight_str)  # перетворення str → float
 
 # --- Обчислення BMI ---
 height_m = height / 100
-bmi = weight / (height_m ** 2)
+bmi = weight / (height_m**2)
 category = bmi_category(bmi)
 
 # --- Вивід у рамці ---
@@ -266,9 +309,21 @@ print("└" + "─" * width + "┘")
 │  Статус: надлишкова вага  │
 └───────────────────────────┘
 """
-#===============================================================================
+# ===============================================================================
 
-#Практика №5
+# Практика №5
+"""
+Поясни, що буде надруковано.
+
+a = 5
+b = a
+b = 10
+
+print(a)
+print(b)
+"""
+
+
 a = 5
 b = a
 b = 10
@@ -294,9 +349,4 @@ print(id(a)) # 140706526774520
 print(id(b)) # 140706526774680 — різні id, бо це різні об'єкти
 
 """
-#===============================================================================
-
-
-
-
-
+# ===============================================================================

@@ -1,7 +1,38 @@
 """
 Challenge №1 — рівень Junior+
 Medical Text Analyzer
+
+Напиши функцію:
+
+def analyze_medical_text(text: str) -> None:
+    ...
+
+Вона повинна:
+
+прибрати зайві пробіли;
+показати кількість символів;
+показати кількість слів;
+перевести текст у lowercase;
+перевірити наявність слів:
+pain
+fever
+cough
+sinusitis
+показати, які з них знайдені.
+
+Наприклад:
+
+Вхід:
+" Patient complains of fever and sinusitis. "
+
+Результат:
+Characters: 45
+Words: 7
+Found:
+- fever
+- sinusitis
 """
+
 import re
 
 
@@ -17,8 +48,8 @@ def analyze_medical_text(text: str) -> None:
 
     # 3. Кількість слів: токенізуємо через regex — розбиваємо на
     #    слова (\w+) і окремі знаки пунктуації ([^\w\s]) як окремі токени
-    #tokens = re.findall(r"\w+|[^\w\s]", cleaned)
-    #word_count = len(tokens)
+    # tokens = re.findall(r"\w+|[^\w\s]", cleaned)
+    # word_count = len(tokens)
 
     # 3. Кількість слів: токенізуємо через regex — розбиваємо на слова (\w+)
     words = re.findall(r"\w+", cleaned)
@@ -46,10 +77,7 @@ def analyze_medical_text(text: str) -> None:
     title = "MEDICAL TEXT ANALYSIS"
 
     # 8. Розраховуємо ширину з урахуванням і title, і lines
-    width = max(
-        len(title),
-        max(len(line) for line in lines)
-    ) + 4
+    width = max(len(title), max(len(line) for line in lines)) + 4
 
     # 9. Виводимо рамку
     print("┌" + "─" * width + "┐")
@@ -61,11 +89,10 @@ def analyze_medical_text(text: str) -> None:
 
     print("└" + "─" * width + "┘")
 
+
 # --- Приклад використання ---
 
-analyze_medical_text(
-    " Patient complains of fever and sinusitis. "
-)
+analyze_medical_text(" Patient complains of fever and sinusitis. ")
 
 """
 ┌─────────────────────────┐
@@ -108,10 +135,22 @@ r"\w"	raw triple-quoted string → \w сприймається буквальн�
 
 Отже, помилка у VS Code — не в re.findall(). Вона виникла через те, що приклад regex був поміщений у звичайний одинарний рядок " ... ". Для навчального тексту найкраще замінити його на r" ... ".
 """
-#===============================================================================
+# ===============================================================================
 """
 🧠 Challenge №2 — співбесіда
+
+Не запускаючи код, спрогнозуй результат:
+
+text = "Python"
+
+print(text[1:5])
+print(text[-3:])
+print(text[::-1])
+print("py" in text.lower())
+
+І поясни кожен результат.
 """
+
 """
 Пояснення кожного рядка:
 
@@ -138,6 +177,4 @@ text.lower() перетворює "Python" → "python" (усі символи �
 
 Головна пастка співбесіди тут: зрізи (slice) у Python ніколи не викидають помилку через вихід за межі — навіть якщо написати text[1:100], Python просто поверне все, що є, аж до кінця рядка, без IndexError. Це відрізняється від звернення до одного індексу (text[100]), яке впаде з помилкою IndexError, якщо індекс не існує.
 """
-
-
-#===============================================================================
+# ===============================================================================

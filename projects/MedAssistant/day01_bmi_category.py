@@ -1,3 +1,27 @@
+"""
+Створи клас MedicalMeasurement.
+
+Він повинен:
+
+Patient:
+Weight:
+Height:
+BMI:
+Object ID:
+Weight type:
+Height type:
+BMI type:
+
+Вимоги:
+
+використовувати @dataclass;
+додати type hints;
+BMI оформити як @property;
+створити метод display();
+вивести id() об'єкта;
+перевіряти, що зріст і вага більші за нуль (можна через __post_init__).
+"""
+
 import json
 from dataclasses import asdict, dataclass
 from enum import Enum
