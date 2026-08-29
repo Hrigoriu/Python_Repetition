@@ -1,55 +1,49 @@
-from collections.abc import Callable
+THRESHOLD = 39.0
 
 
-def apply_operation(
-    value: float,
-    operation: Callable[[float], float],
-) -> float:
-    """Застосовує довільну функцію `operation` до `value`.
+def get_high_risk_patients(patients: list[tuple[str, float]]) -> list[str]:
+    """Повертає імена пацієнтів із температурою >= 39.0.
 
-    `operation` — це САМА ФУНКЦІЯ, передана як звичайний аргумент
-    (без дужок виклику!). apply_operation не знає ЗАЗДАЛЕГІДЬ,
-    яку саме операцію застосує — вона просто викликає те,
-    що їй передали.
+    Використовує list comprehension: одночасно фільтрує (if temp >= THRESHOLD)
+    і трансформує (беремо лише name, відкидаючи temp).
     """
-    return operation(value)
+    return [name for name, temp in patients if temp >= THRESHOLD]
 
 
-def double(x):
-    """Подвоює число."""
-    return x * 2
+def get_high_risk_patients_for_loop(patients: list[tuple[str, float]]) -> list[str]:
+    """Той самий результат, реалізований звичайним for — для порівняння."""
+    result = []
+    for name, temp in patients:
+        if temp >= THRESHOLD:
+            result.append(name)
+    return result
 
 
-def square(x):
-    """Підносить число до квадрата."""
-    return x**2
-
-
-def celsius_to_fahrenheit(x):
-    """Переводить температуру з Цельсія у Фаренгейт."""
-    return x * 9 / 5 + 32
-
-
-# --- Виклики: та сама функція apply_operation, різна поведінка ---
-results = [
-    ("apply_operation(5, double)", apply_operation(5, double)),
-    ("apply_operation(5, square)", apply_operation(5, square)),
-    (
-        "apply_operation(37, celsius_to_fahrenheit)",
-        apply_operation(37, celsius_to_fahrenheit),
-    ),
-    # lambda — "анонімна" функція без імені, визначена прямо в місці виклику
-    ("apply_operation(10, lambda x: x + 100)", apply_operation(10, lambda x: x + 100)),
+# --- Демонстрація ---
+patients = [
+    ("Ivan", 36.6),
+    ("Olena", 38.2),
+    ("Petro", 39.1),
+    ("Hanna", 37.0),
+    ("Dmytro", 39.5),
 ]
 
+high_risk_comprehension = get_high_risk_patients(patients)
+high_risk_for_loop = get_high_risk_patients_for_loop(patients)
+
 # --- Вивід у рамці ---
-label_width = max(len(label) for label, _ in results)
-value_width = max(len(str(v)) for _, v in results)
-width = label_width + value_width + 5
+lines = [
+    f"Пацієнти: {patients}",
+    "─" * 30,
+    f"List comprehension: {high_risk_comprehension}",
+    f"Звичайний for:      {high_risk_for_loop}",
+]
+
+width = max(len(line) for line in lines) + 4
 
 print("\n┌" + "─" * width + "┐")
-print("│" + "  ФУНКЦІЯ ЯК АРГУМЕНТ".center(width) + "│")
+print("│" + "  ПАЦІЄНТИ ГРУПИ РИЗИКУ (≥ 39.0)".center(width) + "│")
 print("├" + "─" * width + "┤")
-for label, value in results:
-    print(f"│  {label.ljust(label_width)} │ {str(value).ljust(value_width)} │")
+for line in lines:
+    print("│  " + line.ljust(width - 2) + "│")
 print("└" + "─" * width + "┘")
