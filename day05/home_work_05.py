@@ -357,6 +357,7 @@ if / elif / else
 f-string
 """
 
+# Variant #1
 """
 Ця задача чудово поєднує одразу кілька важливых концепцій Python. Щоб таблиця виглядала рівною, ми використаємо магію форматування рядків (f-strings) з вирівнюванням.
 """
@@ -447,6 +448,96 @@ print("└───┴───────────┴───────�
 └───┴───────────┴───────────────┴──────────────┘
 """
 
+# Variant #2
+
+patients = [
+    ("Ivan", 36.6),
+    ("Olena", 38.2),
+    ("Petro", 39.1),
+    ("Hanna", 37.0),
+]
+
+MARKER = {
+    "Normal":     "🟢",
+    "Fever":      "🟡",
+    "High fever": "🔴",
+}
+
+# --- Формуємо рядки таблиці ---
+rows = []
+
+# enumerate() дає (номер, елемент), а елемент — це tuple (ім'я, температура)
+# розпаковуємо ОБИДВА рівні одразу: (index, (name, temp))
+for index, (name, temp) in enumerate(patients, start=1):
+
+    # if/elif/else — визначаємо статус (межі без перекриттів)
+    if temp < 37.5:
+        status = "Normal"
+    elif temp < 39.0:      # Python вже знає: temp >= 37.5
+        status = "Fever"
+    else:                  # temp >= 39.0
+        status = "High fever"
+
+    marker = MARKER[status]
+
+    # f-string з вирівнюванням через :< (ліворуч) і задану ширину
+    row = f"{index:<3} │ {name:<8} │ {temp:<5.1f} │ {marker} {status}"
+    rows.append(row)
+
+# --- Заголовок таблиці (та сама структура колонок) ---
+header = f"{'#':<3} │ {'Patient':<8} │ {'Temp':<5} │ Status"
+
+# --- Вивід у рамці ---
+all_lines = [header] + rows
+width = max(len(line) for line in all_lines) + 4
+
+print("\n┌" + "─" * width + "┐")
+print("│" + "  TEMPERATURE REPORT".center(width) + "│")
+print("├" + "─" * width + "┤")
+print("│  " + header.ljust(width - 2) + "│")
+print("│  " + "─" * (width - 4) + "│")
+for row in rows:
+    print("│  " + row.ljust(width - 2) + "│")
+print("└" + "─" * width + "┘")
+
+"""
+Розбір кожної технології, яку об'єднує це завдання:
+
+1. enumerate() + розпакування вкладеного tuple:
+
+patients = [("Ivan", 36.6), ("Olena", 38.2), ...]
+
+for index, (name, temp) in enumerate(patients, start=1):
+#    ↑        ↑     ↑
+#  номер   ім'я  температура
+
+Тут відбувається подвійне розпакування: enumerate() дає (1, ("Ivan", 36.6)), а потім (name, temp) розпаковує внутрішній tuple ("Ivan", 36.6) ще раз — усе в одному рядку for.
+
+2. if/elif/else — класифікація за межами без перекриттів (як у попередніх завданнях з BMI/температурою).
+
+3. f-string з форматуванням вирівнювання:
+
+f"{index:<3}"    # <  — вирівняти ЛІВОРУЧ, ширина поля 3 символи
+f"{temp:<5.1f}"  # <5.1f — ліворуч, ширина 5, 1 знак після коми
+
+Символ < (ліворуч), > (праворуч), ^ (по центру) — вказує напрямок вирівнювання всередині заданої ширини поля.
+
+4. Словник MARKER — той самий підхід, що й у минулих завданнях: замість if status == "Fever": marker = "🟡" (ще один if/elif) — просто MARKER[status], бо словник уже містить готове відображення.
+
+Приклад виводу:
+
+┌───────────────────────────────────────┐
+│           TEMPERATURE REPORT              │
+├───────────────────────────────────────┤
+│  #   │ Patient  │ Temp  │ Status         │
+│  ─────────────────────────────────       │
+│  1   │ Ivan     │ 36.6  │ 🟢 Normal      │
+│  2   │ Olena    │ 38.2  │ 🟡 Fever       │
+│  3   │ Petro    │ 39.1  │ 🔴 High fever  │
+│  4   │ Hanna    │ 37.0  │ 🟢 Normal      │
+└───────────────────────────────────────┘
+"""
+
 # ==============================================================================
 # ==============================================================================
 
@@ -473,6 +564,7 @@ patients = [
 Підказка: тут дуже добре підходить for ... else.
 """
 
+# Variant #1
 """
 Ця задача — просто ідеальний майданчик для демонстрації магії конструкції for ... else. У багатьох інших мовах програмування довелося б створювати додаткову змінну-прапорець (наприклад, is_found = False), але Python дозволяє зробити це елегантно.
 """
@@ -595,4 +687,136 @@ if not search_name: break — це запобіжник, який зупиняє
 │  Запит: Dmytro                             │
 │  Статус: ❌ Patient not found              │
 └────────────────────────────────────────────┘
+"""
+
+# Variant #2
+
+patients = [
+    "Ivan",
+    "Olena",
+    "Petro",
+    "Hanna",
+]
+
+search_name = input("Введіть ім'я пацієнта для пошуку: ").strip()
+
+steps = []   # кроки пошуку для виводу в рамці
+
+# --- for/else: ідеальна конструкція саме для пошуку ---
+for patient in patients:
+    # .lower() з обох боків — порівняння нечутливе до регістру
+    # "ivan" == "Ivan" було б False, але "ivan" == "ivan" (обидва lower) — True
+    if patient.lower() == search_name.lower():
+        steps.append(f"✅ {patient} ← знайдено!")
+        result = "Patient found"
+        break                              # зупиняємо цикл одразу
+    steps.append(f"🔍 {patient} — не збігається")
+else:
+    # виконується ТІЛЬКИ якщо break НЕ спрацював (пройшли весь список)
+    result = "Patient not found"
+
+# --- Вивід у рамці ---
+lines = steps + ["─" * max(len(s) for s in steps), result]
+width = max(len(line) for line in lines) + 4
+
+print("\n┌" + "─" * width + "┐")
+print("│" + f"  ПОШУК: {search_name}".center(width) + "│")
+print("├" + "─" * width + "┤")
+for line in lines:
+    print("│  " + line.ljust(width - 2) + "│")
+print("└" + "─" * width + "┘")
+
+"""
+Чому for...else тут ідеально підходить:
+for patient in patients:
+    if patient.lower() == search_name.lower():
+        result = "Patient found"
+        break            # ← знайшли → else НЕ виконається
+else:
+    result = "Patient not found"   # ← виконається ЛИШЕ якщо break не спрацював
+
+Це рівно та логіка, яку описує підказка в завданні: else тут означає "якщо цикл дійшов до кінця, так і не знайшовши збігу" — саме сценарій "not found".
+
+Чому .lower() з обох сторін:
+patient = "Ivan"
+search_name = "ivan"
+
+patient == search_name              # False — різний регістр!
+patient.lower() == search_name.lower()   # True  — "ivan" == "ivan" ✅
+
+Важливо порівнювати обидві сторони через .lower(), а не тільки одну — бо якщо порівняти "Ivan".lower() з просто search_name (без .lower()), пошук "IVAN" все одно не спрацює.
+"""
+
+#Альтернатива без for/else (для порівняння):
+
+# ❌ Без for/else потрібен окремий прапорець:
+found = False
+for patient in patients:
+    if patient.lower() == search_name.lower():
+        found = True
+        break
+result = "Patient found" if found else "Patient not found"
+
+# ✅ З for/else — прапорець не потрібен, код чистіший:
+for patient in patients:
+    if patient.lower() == search_name.lower():
+        result = "Patient found"
+        break
+else:
+    result = "Patient not found"
+
+"""
+Приклад роботи (пошук "petro" малими літерами):
+Введіть ім'я пацієнта для пошуку: petro
+
+┌─────────────────────────┐
+│      ПОШУК: petro         │
+├─────────────────────────┤
+│  🔍 Ivan — не збігається  │
+│  🔍 Olena — не збігається │
+│  ✅ Petro ← знайдено!     │
+│  ────────────────────     │
+│  Patient found             │
+└─────────────────────────┘
+"""
+
+"""
+Введіть ім'я пацієнта для пошуку: olena
+
+┌──────────────────────────┐
+│        ПОШУК: olena      │
+├──────────────────────────┤
+│  🔍 Ivan — не збігається  │
+│  ✅ Olena ← знайдено!     │
+│  ──────────────────────  │
+│  Patient found           │
+└──────────────────────────┘
+"""
+
+"""
+Введіть ім'я пацієнта для пошуку: Olena
+
+┌──────────────────────────┐
+│        ПОШУК: Olena      │
+├──────────────────────────┤
+│  🔍 Ivan — не збігається  │
+│  ✅ Olena ← знайдено!     │
+│  ──────────────────────  │
+│  Patient found           │
+└──────────────────────────┘
+"""
+
+"""
+Введіть ім'я пацієнта для пошуку: Dinis
+
+┌───────────────────────────┐
+│         ПОШУК: Dinis      │
+├───────────────────────────┤
+│  🔍 Ivan — не збігається   │
+│  🔍 Olena — не збігається  │
+│  🔍 Petro — не збігається  │
+│  🔍 Hanna — не збігається  │
+│  ───────────────────────  │
+│  Patient not found        │
+└───────────────────────────┘
 """
