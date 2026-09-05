@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Ivan",
+        "age": 42,
+        "diagnosis": "sinusitis",
+        "temperature": 37.2
+    },
+    {
+        "id": 2,
+        "name": "Olena",
+        "age": 35,
+        "diagnosis": "rhinitis",
+        "temperature": 36.7
+    },
+    {
+        "id": 3,
+        "name": "Petro",
+        "age": 61,
+        "diagnosis": "sinusitis",
+        "temperature": 38.5
+    }
+]

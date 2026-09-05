@@ -1,0 +1,7 @@
+PATIENT REPORT
+==============
+
+Total patients: 3
+Average age: 43.7
+Oldest patient: Petro
+Oldest age: 51

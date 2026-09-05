@@ -1,0 +1,12 @@
+{
+  "total_patients": 3,
+  "average_age": 46.0,
+  "average_temperature": 37.5,
+  "high_temperature_patients": [
+    "Petro"
+  ],
+  "sinusitis_patients": [
+    "Ivan",
+    "Petro"
+  ]
+}

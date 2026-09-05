@@ -1,0 +1,10 @@
+{
+  "id": 101,
+  "name": "Ivan",
+  "age": 42,
+  "diagnoses": [
+    "sinusitis",
+    "rhinitis"
+  ],
+  "is_active": true
+}
