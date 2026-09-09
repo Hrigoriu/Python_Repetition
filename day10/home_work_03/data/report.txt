@@ -1,0 +1,10 @@
+MEDASSISTANT PATIENT REPORT
+===========================
+
+Total patients: 3
+Average age: 46.0
+Average temperature: 37.5
+Oldest patient: Petro (61)
+
+Patients with temperature >= 38.0: Petro
+Patients with sinusitis: Ivan, Petro

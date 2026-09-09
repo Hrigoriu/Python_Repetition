@@ -1,0 +1,9 @@
+MEDASSISTANT REPORT
+===================
+
+Total patients: 4
+Average age: 41.8
+Average temperature: 37.6
+Oldest patient: Petro (61)
+
+Search result for 'Petro': Petro, age 61, diagnosis: sinusitis
