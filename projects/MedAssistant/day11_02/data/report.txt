@@ -1,0 +1,12 @@
+MEDASSISTANT PATIENT REPORT
+===========================
+
+Total valid patients: 2
+Average age: 48.0
+Average temperature: 37.6
+Oldest patient: Petro (61)
+
+Skipped invalid patients: 3
+  - Ivan (index 0): 'temperature' must be in range 25.0-45.0, got 13.2
+  - 55 (index 3): 'id' must be positive, got -4; 'name' must be a string, got 55; 'age' must be an integer, got '61'
+  - Petro (index 4): 'temperature' must be in range 25.0-45.0, got 58.5

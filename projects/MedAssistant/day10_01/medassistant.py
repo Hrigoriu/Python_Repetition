@@ -40,7 +40,9 @@ def load_patients(path: str) -> list[dict] | None:
 # ═══════════════════════════════════════════
 # GENERATE REPORT
 # ═══════════════════════════════════════════
-def generate_report(patients: list[dict], searched_patient: dict | None, search_name: str) -> str:
+def generate_report(
+    patients: list[dict], searched_patient: dict | None, search_name: str
+) -> str:
     """Build a human-readable text report.
 
     Args:
@@ -132,4 +134,31 @@ if __name__ == "__main__":
 │                                                                  │
 │  Search result for 'Petro': Petro, age 61, diagnosis: sinusitis  │
 └──────────────────────────────────────────────────────────────────┘
+"""
+
+"""
+#*Чому межі модулів накреслені саме так:
+patient_utils.py      → вміє ЗНАЙТИ окремого пацієнта (find_patient)
+statistics_utils.py   → вміє ЗБИРАТИ ДАНІ щодо багатьох пацієнтів (average_*, oldest_*)
+medassistant.py        → НІЧОГО не знає про саму логіку роботи з пацієнтами — він лише
+                          завантажує дані, викликає два модулі-утиліти та
+                          обробляє введення-виведення (читання/запис файлів)
+
+Це точно віддзеркалює реструктуризацію файлу day10/class_work_10.py із Завдання 7 (імпорт → дані → виклики → вихідні дані), масштабовану до рівня реального «додатка»: файл medassistant.py ніколи сам не обчислює середнє значення та не здійснює пошук у списку — він лише координує виклики до двох допоміжних модулів, застосовуючи той самий принцип розділення відповідальності, що й на рівні файлів.
+
+#*Чому find_patient() повертає dict | None, і як generate_report() обробляє обидва випадки:
+searched_patient = find_patient(patients, «Petro»)   # → словник, оскільки Petro існує
+
+search_line = (
+    f"{searched_patient['name']}, age {searched_patient['age']}, "
+    f"diagnosis: {searched_patient['diagnosis']}"
+    if searched_patient is not None     # ← явна перевірка на None перед використанням словника
+    else f"'{search_name}' not found"
+)
+
+Це той самий захисний алгоритм, що й у попередньому завданні «find_patient» — генератор звіту ніколи не припускає, що пошук завершився успішно; він явно виконує розгалуження у випадку значення None, тож відсутність пацієнта призводить до виведення чіткого повідомлення замість помилки TypeError, яка виникає при спробі індексації за None.
+
+Чому конвеєр все ще дотримується послідовності «завантаження → обчислення → фільтрація/пошук → генерація → збереження»:
+
+Це та сама п’ятиетапна архітектура, що й у завданні «MedAssistant Data Pipeline» з дня 09 — load_patients() (введення-виведення), дві функції statistics_utils (чисті обчислення), find_patient() (чистий пошук), generate_report() (чисте форматування), save_report() (введення-виведення). Кожен етап можна тестувати незалежно, і в кожного є лише одна причина для зміни.
 """
