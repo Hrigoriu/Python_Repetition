@@ -1,0 +1,10 @@
+MEDASSISTANT PATIENT REPORT
+===========================
+
+Total patients: 3
+Average age: 46.0
+Average temperature: 37.5
+Oldest patient: Petro (61)
+
+Patients with fever:
+  - #3 Petro (61, adult) — sinusitis, 38.5°C (has fever), BMI 32.1
