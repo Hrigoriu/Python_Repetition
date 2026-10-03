@@ -1,0 +1,9 @@
+[
+  {"id": 1, "name": "Ivan", "age": 42, "diagnosis": "sinusitis", "temperature": 37.2},
+  {"id": 2, "name": "Olena", "age": 35, "diagnosis": "rhinitis", "temperature": 38.4},
+  {"id": 3, "name": "Petro", "age": 61, "diagnosis": "sinusitis", "temperature": 38.9},
+  {"id": 4, "name": "Sofia", "age": 15, "diagnosis": "otitis", "temperature": 36.6},
+  {"id": 5, "name": "Hanna", "age": 29, "temperature": 36.9},
+  {"id": -6, "name": "", "age": "61", "diagnosis": "otitis", "temperature": 99},
+  "not a record"
+]

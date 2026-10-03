@@ -1,0 +1,28 @@
+MEDASSISTANT PATIENT REPORT
+===========================
+
+Records in file: 8
+Valid records: 5
+Skipped records: 3
+
+Average age: 36.4
+Average temperature: 38.0
+Adults: 4 of 5
+Oldest patient: Petro (61)
+
+Patients with fever (>= 37.5°C): 3
+  - #2 Olena (35, adult) — rhinitis, 38.4°C (fever)
+  - #3 Petro (61, adult) — sinusitis, 38.5°C (fever)
+  - #8 Hanna (29, adult) — pharyngitis, 39.1°C (fever)
+
+Skipped records (3):
+  - index 4 (Mykola):
+      * missing key 'temperature'
+  - index 5 (unnamed):
+      * id must be a positive integer, got -6
+      * name must be a non-empty string, got ''
+      * age must be a positive integer, got '61'
+      * diagnosis must be a non-empty string, got ''
+      * temperature must be between 25.0 and 45.0, got 99
+  - index 6 (unnamed):
+      * record must be a JSON object, got str
